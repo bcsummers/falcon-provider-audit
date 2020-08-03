@@ -19,25 +19,25 @@ udp_server = test_syslog.start_udp_server(port=5140)
 
 
 @pytest.fixture
-def client_db_1():
+def client_db_1() -> testing.TestClient:
     """Create testing client"""
     return testing.TestClient(app_db_1)
 
 
 @pytest.fixture
-def client_dual_1():
+def client_dual_1() -> testing.TestClient:
     """Create testing client"""
     return testing.TestClient(app_dual_1)
 
 
 @pytest.fixture
-def client_dual_2():
+def client_dual_2() -> testing.TestClient:
     """Create testing client"""
     return testing.TestClient(app_dual_2)
 
 
 @pytest.fixture
-def client_rotating_logger_1():
+def client_rotating_logger_1() -> testing.TestClient:
     """Create testing client"""
     from .Rotating_Logger.app import (  # pylint: disable=import-outside-toplevel
         app_rotating_logger_1,
@@ -47,7 +47,7 @@ def client_rotating_logger_1():
 
 
 @pytest.fixture
-def client_rotating_logger_2():
+def client_rotating_logger_2() -> testing.TestClient:
     """Create testing client"""
     from .Rotating_Logger.app import (  # pylint: disable=import-outside-toplevel
         app_rotating_logger_2,
@@ -57,7 +57,7 @@ def client_rotating_logger_2():
 
 
 @pytest.fixture
-def client_tcp_logger_1():
+def client_tcp_logger_1() -> testing.TestClient:
     """Create testing client"""
     from .Syslog.app import app_tcp_syslog_logger_1  # pylint: disable=import-outside-toplevel
 
@@ -65,7 +65,7 @@ def client_tcp_logger_1():
 
 
 @pytest.fixture
-def client_tcp_logger_2():
+def client_tcp_logger_2() -> testing.TestClient:
     """Create testing client"""
     from .Syslog.app import app_tcp_syslog_logger_2  # pylint: disable=import-outside-toplevel
 
@@ -73,7 +73,7 @@ def client_tcp_logger_2():
 
 
 @pytest.fixture
-def client_udp_logger_1():
+def client_udp_logger_1() -> testing.TestClient:
     """Create testing client"""
     from .Syslog.app import app_udp_syslog_logger_1  # pylint: disable=import-outside-toplevel
 
@@ -81,7 +81,7 @@ def client_udp_logger_1():
 
 
 @pytest.fixture
-def client_udp_logger_2():
+def client_udp_logger_2() -> testing.TestClient:
     """Create testing client"""
     from .Syslog.app import app_udp_syslog_logger_2  # pylint: disable=import-outside-toplevel
 
@@ -89,12 +89,12 @@ def client_udp_logger_2():
 
 
 @pytest.fixture
-def log_directory():
+def log_directory() -> str:
     """Return the log directory"""
     return _LOG_DIRECTORY
 
 
-def pytest_configure():
+def pytest_configure() -> None:
     """Clear the log directory after tests are complete"""
     # start TCP syslog servers
     tcp_thread = threading.Thread(name='tcp_server', target=tcp_server.serve_forever, daemon=True)
@@ -105,7 +105,7 @@ def pytest_configure():
     udp_thread.start()
 
 
-def pytest_unconfigure(config):  # pylint: disable=unused-argument
+def pytest_unconfigure(config) -> None:  # pylint: disable=unused-argument
     """Clear the log directory after tests are complete"""
     if os.path.isdir(_LOG_DIRECTORY):
         for log_file in os.listdir(_LOG_DIRECTORY):

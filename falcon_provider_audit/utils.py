@@ -92,14 +92,14 @@ class AuditProvider:
         """Add audit event"""
         raise NotImplementedError('This method must be implemented in child class.')
 
-    def audit_control(self, audit_control: Optional[dict] = None):
+    def audit_control(self, audit_control: Optional[dict] = None) -> dict:
         """Return audit control settings.
 
         Args:
             audit_control: The audit control settings.
 
         Returns:
-            dict: Update audit control settings.
+            dict: Updated audit control settings.
         """
         audit_control = audit_control or {}
         self._audit_control = dict(self._global_audit_control)
