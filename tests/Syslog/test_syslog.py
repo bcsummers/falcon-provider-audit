@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Test hooks feature of falcon_provider_memcache module."""
 # standard library
 import os
@@ -23,7 +22,7 @@ def has_text(logfile: str, text: str) -> bool:
         bool: True if text is found, else False.
     """
     time.sleep(0.10)  # allow time for log to flush
-    with open(logfile, 'r') as fh:
+    with open(logfile, encoding='utf-8') as fh:
         for line in fh.read().strip().split('\n'):
             if text in line:
                 break

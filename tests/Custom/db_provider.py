@@ -1,8 +1,6 @@
-# -*- coding: utf-8 -*-
 """Audit middleware module."""
 # standard library
 from datetime import datetime
-from typing import Optional
 
 # third-party
 import sqlalchemy as db
@@ -53,7 +51,7 @@ class DbAuditProvider(AuditProvider):
         audit_control: A default audit control object.
     """
 
-    def __init__(self, audit_control: Optional[dict] = None):
+    def __init__(self, audit_control: dict | None = None):
         """Initialize class properties"""
         super().__init__(audit_control)
 
@@ -75,6 +73,6 @@ class DbAuditProvider(AuditProvider):
                 ae = AuditModel(**event)
                 session.add(ae)  # pylint: disable=no-member
                 session.commit()  # pylint: disable=no-member
-            except Exception:  # pragma: no cover; pylint: disable=broad-except
+            except Exception:  # nosec; pragma: no cover; pylint: disable=broad-except
                 # appropriately handle db error
                 pass

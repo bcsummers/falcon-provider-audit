@@ -2,9 +2,9 @@ name: build
 
 on:
   push:
-    branches: [develop, master]
+    branches: [develop, main]
   pull_request:
-    branches: [develop, master]
+    branches: [develop, main]
   workflow_dispatch:
 
 jobs:
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.8]
+        python-version: [3.11]
 
     steps:
       - uses: actions/checkout@v2
@@ -58,13 +58,29 @@ jobs:
           pre-commit run --all-files
         env:
           PRE_COMMIT_HOME: ${{ github.workspace }}/.cache/pre-commit-${{ matrix.python-version }}
+            ${{ runner.os }}-pip-${{ matrix.python-version }}
+
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install .[develop]
+
+      # Lint project using pre-commit config
+      - name: Lint with pre-commit
+        run: |
+          pre-commit --version
+          pre-commit install
+          pre-commit run --all-files
+        env:
+          PRE_COMMIT_HOME: ${{ github.workspace }}/.cache/pre-commit-${{ matrix.python-version }}
 
   test:
     needs: pre-flight
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.6, 3.7, 3.8]
+        python-version: [3.6, 3.9, 3.10, 3.11]
 
     steps:
       - uses: actions/checkout@v2
@@ -74,6 +90,21 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
+
+      # Get pip directory
+      - name: Get pip cache dir
+        id: pip-cache
+        run: |
+          echo "::set-output name=dir::$(pip cache dir)"
+
+      # Cache pip directory
+      - name: pip cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.pip-cache.outputs.dir }}
+          key: ${{ runner.os }}-pip-${{ matrix.python-version }}
+          restore-keys: |
+            ${{ runner.os }}-pip-${{ matrix.python-version }}
 
       # Get pip directory
       - name: Get pip cache dir

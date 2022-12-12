@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
 """Package version and other metadata"""
 
-__author__ = 'Bracey Summers (bcsummers@gmail.com)'
+__author__ = 'Bracey Summers <bcsummers@gmail.com>'
 __author_email__ = 'bcsummers@gmail.com'
 __description__ = 'A falcon middleware audit provider.'
 __license__ = 'Apache License, Version 2'

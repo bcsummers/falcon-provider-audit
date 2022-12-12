@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Falcon app used for testing."""
 # third-party
 import falcon
@@ -35,25 +34,23 @@ audit_control = {
 class RotatingLoggerResource1:
     """Memcache middleware testing resource."""
 
-    # pylint: disable=no-self-use
     def on_get(self, req: falcon.Request, resp: falcon.Response) -> None:
         """Support GET method."""
         key: str = req.get_param('key')
-        resp.body = f'Audited - {key}'
+        resp.text = f'Audited - {key}'
         resp.set_header('content-type', 'application/json')
 
-    # pylint: disable=no-self-use
     def on_post(self, req: falcon.Request, resp: falcon.Response) -> None:
         """Support POST method."""
         key: str = req.get_param('key')
         value: str = req.get_param('value')
-        resp.body = f'Audited - {key} {value}'
+        resp.text = f'Audited - {key} {value}'
         resp.set_header('content-type', 'application/json')
 
 
 providers = [RotatingLoggerAuditProvider(audit_control=audit_control, logger_name='ROT1')]
 
-app_rotating_logger_1 = falcon.API(middleware=[AuditMiddleware(providers=providers)])
+app_rotating_logger_1 = falcon.App(middleware=[AuditMiddleware(providers=providers)])
 app_rotating_logger_1.add_route('/middleware', RotatingLoggerResource1())
 
 
@@ -70,44 +67,40 @@ class RotatingLoggerResource2:
         },
     }
 
-    # pylint: disable=no-self-use
     def on_get(self, req: falcon.Request, resp: falcon.Response) -> None:
         """Support GET method."""
         key: str = req.get_param('key')
-        resp.body = f'Audited - {key}'
+        resp.text = f'Audited - {key}'
         resp.set_header('content-type', 'application/json')
 
-    # pylint: disable=no-self-use
     def on_put(self, req: falcon.Request, resp: falcon.Response) -> None:
         """Support PUT method."""
         key: str = req.get_param('key')
         value: str = req.get_param('value')
-        resp.body = f'Audited - {key} {value}'
+        resp.text = f'Audited - {key} {value}'
         resp.set_header('content-type', 'application/json')
 
 
 providers = [RotatingLoggerAuditProvider(audit_control=audit_control, logger_name='ROT2')]
 
-app_rotating_logger_2 = falcon.API(middleware=[AuditMiddleware(providers=providers)])
+app_rotating_logger_2 = falcon.App(middleware=[AuditMiddleware(providers=providers)])
 app_rotating_logger_2.add_route('/middleware', RotatingLoggerResource2())
 
 
 class DualLoggerResource1:
     """Memcache middleware testing resource."""
 
-    # pylint: disable=no-self-use
     def on_get(self, req: falcon.Request, resp: falcon.Response) -> None:
         """Support GET method."""
         key = req.get_param('key')
-        resp.body = f'Audited - {key}'
+        resp.text = f'Audited - {key}'
         resp.set_header('content-type', 'application/json')
 
-    # pylint: disable=no-self-use
     def on_put(self, req: falcon.Request, resp: falcon.Response) -> None:
         """Support PUT method."""
         key = req.get_param('key')
         value = req.get_param('value')
-        resp.body = f'Audited - {key} {value}'
+        resp.text = f'Audited - {key} {value}'
         resp.set_header('content-type', 'application/json')
 
 
@@ -128,19 +121,17 @@ class DualLoggerResource2:
         },
     }
 
-    # pylint: disable=no-self-use
     def on_get(self, req: falcon.Request, resp: falcon.Response) -> None:
         """Support GET method."""
         key = req.get_param('key')
-        resp.body = f'Audited - {key}'
+        resp.text = f'Audited - {key}'
         resp.set_header('content-type', 'application/json')
 
-    # pylint: disable=no-self-use
     def on_put(self, req: falcon.Request, resp: falcon.Response) -> None:
         """Support PUT method."""
         key = req.get_param('key')
         value = req.get_param('value')
-        resp.body = f'Audited - {key} {value}'
+        resp.text = f'Audited - {key} {value}'
         resp.set_header('content-type', 'application/json')
 
 
@@ -149,6 +140,6 @@ providers = [
     SyslogAuditProvider(audit_control=audit_control, host='0.0.0.0', port=5141, socktype='UDP'),
 ]
 
-app_dual_logger_1 = falcon.API(middleware=[AuditMiddleware(providers=providers)])
+app_dual_logger_1 = falcon.App(middleware=[AuditMiddleware(providers=providers)])
 app_dual_logger_1.add_route('/middleware', DualLoggerResource1())
 app_dual_logger_1.add_route('/middleware2', DualLoggerResource2())

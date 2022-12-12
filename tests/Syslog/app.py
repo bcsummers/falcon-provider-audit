@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Falcon app used for testing."""
 # third-party
 import falcon
@@ -45,23 +44,21 @@ udp_providers = [
 class TcpSysLogResource1:
     """Audit middleware testing resource."""
 
-    # pylint: disable=no-self-use
     def on_get(self, req: falcon.Request, resp: falcon.Response) -> None:
         """Support GET method."""
         key = req.get_param('key')
-        resp.body = f'Audited - {key}'
+        resp.text = f'Audited - {key}'
         resp.set_header('content-type', 'application/json')
 
-    # pylint: disable=no-self-use
     def on_post(self, req: falcon.Request, resp: falcon.Response) -> None:
         """Support POST method."""
         key = req.get_param('key')
         value = req.get_param('value')
-        resp.body = f'Audited - {key} {value}'
+        resp.text = f'Audited - {key} {value}'
         resp.set_header('content-type', 'application/json')
 
 
-app_tcp_syslog_logger_1 = falcon.API(middleware=[AuditMiddleware(providers=tcp_providers)])
+app_tcp_syslog_logger_1 = falcon.App(middleware=[AuditMiddleware(providers=tcp_providers)])
 app_tcp_syslog_logger_1.add_route('/middleware', TcpSysLogResource1())
 
 
@@ -78,46 +75,42 @@ class TcpSysLogResource2:
         },
     }
 
-    # pylint: disable=no-self-use
     def on_get(self, req: falcon.Request, resp: falcon.Response) -> None:
         """Support GET method."""
         key = req.get_param('key')
-        resp.body = f'Audited - {key}'
+        resp.text = f'Audited - {key}'
         resp.set_header('content-type', 'application/json')
 
-    # pylint: disable=no-self-use
     def on_put(self, req: falcon.Request, resp: falcon.Response) -> None:
         """Support PUT method."""
         key = req.get_param('key')
         value = req.get_param('value')
-        resp.body = f'Audited - {key} {value}'
+        resp.text = f'Audited - {key} {value}'
         resp.set_header('content-type', 'application/json')
 
 
-app_tcp_syslog_logger_2 = falcon.API(middleware=[AuditMiddleware(providers=tcp_providers)])
+app_tcp_syslog_logger_2 = falcon.App(middleware=[AuditMiddleware(providers=tcp_providers)])
 app_tcp_syslog_logger_2.add_route('/middleware', TcpSysLogResource2())
 
 
 class UdpSysLogResource1:
     """Audit middleware testing resource."""
 
-    # pylint: disable=no-self-use
     def on_get(self, req: falcon.Request, resp: falcon.Response) -> None:
         """Support GET method."""
         key = req.get_param('key')
-        resp.body = f'Audited - {key}'
+        resp.text = f'Audited - {key}'
         resp.set_header('content-type', 'application/json')
 
-    # pylint: disable=no-self-use
     def on_post(self, req: falcon.Request, resp: falcon.Response) -> None:
         """Support POST method."""
         key = req.get_param('key')
         value = req.get_param('value')
-        resp.body = f'Audited - {key} {value}'
+        resp.text = f'Audited - {key} {value}'
         resp.set_header('content-type', 'application/json')
 
 
-app_udp_syslog_logger_1 = falcon.API(middleware=[AuditMiddleware(providers=udp_providers)])
+app_udp_syslog_logger_1 = falcon.App(middleware=[AuditMiddleware(providers=udp_providers)])
 app_udp_syslog_logger_1.add_route('/middleware', UdpSysLogResource1())
 
 
@@ -134,21 +127,19 @@ class UdpSysLogResource2:
         },
     }
 
-    # pylint: disable=no-self-use
     def on_get(self, req: falcon.Request, resp: falcon.Response) -> None:
         """Support GET method."""
         key = req.get_param('key')
-        resp.body = f'Audited - {key}'
+        resp.text = f'Audited - {key}'
         resp.set_header('content-type', 'application/json')
 
-    # pylint: disable=no-self-use
     def on_put(self, req: falcon.Request, resp: falcon.Response) -> None:
         """Support PUT method."""
         key = req.get_param('key')
         value = req.get_param('value')
-        resp.body = f'Audited - {key} {value}'
+        resp.text = f'Audited - {key} {value}'
         resp.set_header('content-type', 'application/json')
 
 
-app_udp_syslog_logger_2 = falcon.API(middleware=[AuditMiddleware(providers=udp_providers)])
+app_udp_syslog_logger_2 = falcon.App(middleware=[AuditMiddleware(providers=udp_providers)])
 app_udp_syslog_logger_2.add_route('/middleware', UdpSysLogResource2())

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Falcon app used for testing."""
 # third-party
 import falcon
@@ -42,22 +41,21 @@ class DbResource1:
     def on_get(self, req: falcon.Request, resp: falcon.Response) -> None:
         """Support GET method."""
         key: str = req.get_param('key')
-        resp.body = f'Audited - {key}'
+        resp.text = f'Audited - {key}'
         resp.set_header('content-type', 'application/json')
         self.my_audit_data = key  # additional data to be added to audit event
 
-    # pylint: disable=no-self-use
     def on_post(self, req: falcon.Request, resp: falcon.Response) -> None:
         """Support POST method."""
         key: str = req.get_param('key')
         value: str = req.get_param('value')
-        resp.body = f'Audited - {key} {value}'
+        resp.text = f'Audited - {key} {value}'
         resp.set_header('content-type', 'application/json')
 
 
 providers = [DbAuditProvider(audit_control=audit_control)]
 
-app_db_1 = falcon.API(middleware=[AuditMiddleware(providers=providers)])
+app_db_1 = falcon.App(middleware=[AuditMiddleware(providers=providers)])
 app_db_1.add_route('/middleware', DbResource1())
 
 
@@ -69,16 +67,15 @@ class DualResource1:
     def on_get(self, req: falcon.Request, resp: falcon.Response) -> None:
         """Support GET method."""
         key: str = req.get_param('key')
-        resp.body = f'Audited - {key}'
+        resp.text = f'Audited - {key}'
         resp.set_header('content-type', 'application/json')
         self.my_audit_data = key  # additional data to be added to audit event
 
-    # pylint: disable=no-self-use
     def on_post(self, req: falcon.Request, resp: falcon.Response) -> None:
         """Support POST method."""
         key: str = req.get_param('key')
         value: str = req.get_param('value')
-        resp.body = f'Audited - {key} {value}'
+        resp.text = f'Audited - {key} {value}'
         resp.set_header('content-type', 'application/json')
 
 
@@ -89,7 +86,7 @@ providers = [
     ),
 ]
 
-app_dual_1 = falcon.API(middleware=[AuditMiddleware(providers=providers)])
+app_dual_1 = falcon.App(middleware=[AuditMiddleware(providers=providers)])
 app_dual_1.add_route('/middleware', DualResource1())
 
 
@@ -103,16 +100,15 @@ class DualResource2:
     def on_get(self, req: falcon.Request, resp: falcon.Response) -> None:
         """Support GET method."""
         key: str = req.get_param('key')
-        resp.body = f'Audited - {key}'
+        resp.text = f'Audited - {key}'
         resp.set_header('content-type', 'application/json')
         self.my_audit_data = key  # additional data to be added to audit event
 
-    # pylint: disable=no-self-use
     def on_post(self, req: falcon.Request, resp: falcon.Response) -> None:
         """Support POST method."""
         key: str = req.get_param('key')
         value: str = req.get_param('value')
-        resp.body = f'Audited - {key} {value}'
+        resp.text = f'Audited - {key} {value}'
         resp.set_header('content-type', 'application/json')
 
 
@@ -123,5 +119,5 @@ providers = [
     ),
 ]
 
-app_dual_2 = falcon.API(middleware=[AuditMiddleware(providers=providers)])
+app_dual_2 = falcon.App(middleware=[AuditMiddleware(providers=providers)])
 app_dual_2.add_route('/middleware', DualResource2())
