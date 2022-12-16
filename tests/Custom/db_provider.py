@@ -67,7 +67,7 @@ class DbAuditProvider(AuditProvider):
         if self.providers is None or (
             isinstance(self.providers, list) and self.name in self.providers
         ):
-            # covert list to string for sqlite, for postgres possible use JSON column type
+            # convert list to string for sqlite, for postgres possible use JSON column type
             event['request_access_route'] = ','.join(event.get('request_access_route'))
             try:
                 ae = AuditModel(**event)
