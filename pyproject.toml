@@ -1,6 +1,6 @@
 [build-system]
-requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core"]
 
 [tool.bandit]
 exclude_dirs = ["tests"]
@@ -12,8 +12,8 @@ skip-string-normalization = true
 [tool.isort]
 ensure_newline_before_comments = true
 force_grid_wrap = 0
-import_heading_stdlib = "standard library"
 import_heading_firstparty = "first-party"
+import_heading_stdlib = "standard library"
 import_heading_thirdparty = "third-party"
 include_trailing_comma = true
 known_third_party = "falcon,pytest"
@@ -25,20 +25,20 @@ use_parentheses = true
 [tool.poetry]
 authors = ["Bracey Summers <bcsummers@gmail.com>"]
 classifiers = [
-    "Development Status :: 5 - Production/Stable",
-    "Environment :: Web Environment",
-    "Framework :: Falcon",
-    "Intended Audience :: Developers",
-    "License :: OSI Approved :: Apache Software License",
-    "Natural Language :: English",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: Implementation :: CPython",
-    "Programming Language :: Python :: Implementation :: PyPy",
-    "Topic :: Internet :: WWW/HTTP :: WSGI :: Middleware",
-    "Topic :: Software Development :: Libraries :: Python Modules",
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: Web Environment",
+  "Framework :: Falcon",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: Apache Software License",
+  "Natural Language :: English",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+  "Topic :: Internet :: WWW/HTTP :: WSGI :: Middleware",
+  "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 description = "A falcon middleware audit provider."
 documentation = "https://github.com/bcsummers/falcon-provider-audit"
@@ -47,10 +47,10 @@ keywords = ["audit", "falcon"]
 license = "Apache-2.0"
 maintainers = ["Bracey Summers <bcsummers@gmail.com>"]
 name = "falcon-provider-audit"
+packages = [{include = "falcon_provider_audit"}]
 readme = "README.rst"
 repository = "https://github.com/bcsummers/falcon-provider-audit"
-packages = [{include = "falcon_provider_audit"}]
-version = "0.0.1"
+version = "0.0.2"
 
 [tool.poetry.dependencies]
 falcon = "^3.1.1"
@@ -87,12 +87,12 @@ ignore = "D202,D203,D213,D301,D400,D406,D407,D413,D415"
 
 [tool.pylint.messages_control]
 disable = [
-    "duplicate-code",  # R0801
-    "fixme",  # W0511
-    "invalid-name",  # C0103
-    "logging-fstring-interpolation",  # W1203
-    "too-few-public-methods",  # R0903
-    "too-many-arguments",  # R0913
-    "too-many-instance-attributes",  # R0902
+  "duplicate-code", # R0801
+  "fixme", # W0511
+  "invalid-name", # C0103
+  "logging-fstring-interpolation", # W1203
+  "too-few-public-methods", # R0903
+  "too-many-arguments", # R0913
+  "too-many-instance-attributes", # R0902
 ]
 extension-pkg-whitelist = "falcon"
