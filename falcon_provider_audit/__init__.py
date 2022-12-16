@@ -1,14 +1,9 @@
-# -*- coding: utf-8 -*-
 """Falcon audit module."""
 # flake8: noqa
-from .__metadata__ import (
-    __author__,
-    __author_email__,
-    __description__,
-    __license__,
-    __package_name__,
-    __url__,
-    __version__,
+# first-party
+from falcon_provider_audit.middleware import AuditMiddleware
+from falcon_provider_audit.utils import (
+    AuditProvider,
+    RotatingLoggerAuditProvider,
+    SyslogAuditProvider,
 )
-from .middleware import AuditMiddleware
-from .utils import AuditProvider, RotatingLoggerAuditProvider, SyslogAuditProvider

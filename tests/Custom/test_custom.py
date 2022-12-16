@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Test hooks feature of falcon_provider_memcache module."""
 # standard library
 from uuid import uuid4
@@ -39,7 +38,7 @@ def test_default_get(client_db_1: object, monkeypatch: object) -> None:
     assert row.request_referer is None
     assert row.request_remote_addr == '127.0.0.1'
     assert row.request_scheme == 'http'
-    assert row.request_user_agent == 'curl/7.24.0 (x86_64-apple-darwin12.0)'
+    assert row.request_user_agent == 'falcon-client/3.1.1'
     assert row.response_content_length == 0
     assert row.response_content_type == 'application/json'
     assert row.response_status == '200 OK'

@@ -1,11 +1,9 @@
-# -*- coding: utf-8 -*-
 """Audit middleware module."""
 # standard library
 import logging
 import os
 import socket
 from logging.handlers import RotatingFileHandler
-from typing import Callable, Optional
 
 
 class RotatingFileHandlerCustom(RotatingFileHandler):
@@ -14,11 +12,11 @@ class RotatingFileHandlerCustom(RotatingFileHandler):
     def __init__(
         self,
         filename: str,
-        mode: Optional[str] = 'a',
-        maxBytes: Optional[int] = 0,
-        backupCount: Optional[int] = 0,
-        encoding: Optional[str] = None,
-        delay: Optional[int] = 0,
+        mode: str | None = 'a',
+        maxBytes: int | None = 0,
+        backupCount: int | None = 0,
+        encoding: str | None = None,
+        delay: int | None = 0,
     ):
         """Customize RotatingFileHandler to create full log path.
 
@@ -42,7 +40,7 @@ class AuditProvider:
         audit_control: A default audit control object.
     """
 
-    def __init__(self, audit_control: Optional[dict] = None):
+    def __init__(self, audit_control: dict | None = None):
         """Initialize class properties
 
         **Audit Control**
@@ -92,7 +90,7 @@ class AuditProvider:
         """Add audit event"""
         raise NotImplementedError('This method must be implemented in child class.')
 
-    def audit_control(self, audit_control: Optional[dict] = None) -> dict:
+    def audit_control(self, audit_control: dict | None = None) -> dict:
         """Return audit control settings.
 
         Args:
@@ -162,17 +160,15 @@ class RotatingLoggerAuditProvider(AuditProvider):
 
     def __init__(
         self,
-        audit_control: Optional[dict] = None,
-        backup_count: Optional[int] = 10,
-        directory: Optional[str] = 'log',
-        filename: Optional[str] = 'audit.log',
-        formatter: Optional[logging.Formatter] = None,
-        # in 3.8 Literal[] could be used
-        level: Optional[str] = 'INFO',
-        logger_name: Optional[str] = 'AUDIT',
-        max_bytes: Optional[int] = 10_485_760,
-        # in 3.8 Literal[] could be used
-        mode: Optional[str] = 'a',
+        audit_control: dict | None = None,
+        backup_count: int | None = 10,
+        directory: str | None = 'log',
+        filename: str | None = 'audit.log',
+        formatter: logging.Formatter | None = None,
+        level: str | None = 'INFO',
+        logger_name: str | None = 'AUDIT',
+        max_bytes: int | None = 10_485_760,
+        mode: str | None = 'a',
     ):
         """Initialize class properties"""
         super().__init__(audit_control)
@@ -225,7 +221,7 @@ class RotatingLoggerAuditProvider(AuditProvider):
         if self.providers is None or (
             isinstance(self.providers, list) and self.name in self.providers
         ):
-            log: Callable[..., None] = getattr(self.log, level)
+            log = getattr(self.log, level)
             event_data = []
             for k, v in sorted(event.items()):
                 if isinstance(v, list):
@@ -251,16 +247,14 @@ class SyslogAuditProvider(AuditProvider):
 
     def __init__(
         self,
-        audit_control: Optional[dict] = None,
-        host: Optional[str] = 'localhost',
-        facility: Optional[str] = 'user',
-        formatter: Optional[logging.Formatter] = None,
-        # in 3.8 Literal[] could be used
-        level: Optional[str] = 'INFO',
-        logger_name: Optional[str] = 'AUDIT',
-        port: Optional[int] = 514,
-        # in 3.8 Literal[] could be used
-        socktype: Optional[str] = 'UDP',
+        audit_control: dict | None = None,
+        host: str | None = 'localhost',
+        facility: str | None = 'user',
+        formatter: logging.Formatter | None = None,
+        level: str | None = 'INFO',
+        logger_name: str | None = 'AUDIT',
+        port: int | None = 514,
+        socktype: str | None = 'UDP',
     ):
         """Initialize class properties"""
         super().__init__(audit_control)
@@ -313,7 +307,7 @@ class SyslogAuditProvider(AuditProvider):
         if self.providers is None or (
             isinstance(self.providers, list) and self.name in self.providers
         ):
-            log: Callable[..., None] = getattr(self.log, level)
+            log = getattr(self.log, level)
             event_data = []
             for k, v in sorted(event.items()):
                 if isinstance(v, list):

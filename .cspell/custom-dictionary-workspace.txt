@@ -1,0 +1,15 @@
+# Custom Dictionary Words
+autofix
+Bracey
+falconframework
+isort
+junitxml
+pathing
+pydocstyle
+pylint
+pytest
+pyupgrade
+sessionmaker
+socktype
+sqlalchemy
+unconfigure

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Testing conf module."""
 # standard library
 import os
@@ -13,7 +12,7 @@ from .Syslog.syslog_server import TestSyslogServers
 
 # the log directory for all test cases
 _LOG_DIRECTORY = os.path.join(os.getcwd(), 'log')
-test_syslog = TestSyslogServers(address='0.0.0.0', log_directory=_LOG_DIRECTORY)
+test_syslog = TestSyslogServers(address='0.0.0.0', log_directory=_LOG_DIRECTORY)  # nosec
 tcp_server = test_syslog.start_tcp_server(port=5141)
 udp_server = test_syslog.start_udp_server(port=5140)
 

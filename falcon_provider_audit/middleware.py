@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
 """Falcon audit middleware module."""
-
-
-# standard library
-from typing import Any, List
 
 # third-party
 import falcon
@@ -12,7 +7,7 @@ import falcon
 class AuditMiddleware:
     """Audit middleware provider."""
 
-    def __init__(self, providers: List[object], user_id=None):
+    def __init__(self, providers: list[object], user_id=None):
         """Initialize class properties.
 
         Args:
@@ -115,7 +110,7 @@ class AuditMiddleware:
         for label, field in field_dict.items():
             key1, key2 = self.key_value(field)
             try:
-                data: Any = getattr(obj, key1)
+                data: dict | list | str = getattr(obj, key1)
 
                 if field.startswith('context.') and hasattr(obj, 'context'):
                     event_data[label] = self.get_event_data_context(field, obj)
@@ -132,7 +127,7 @@ class AuditMiddleware:
         return event_data
 
     @staticmethod
-    def get_event_data_context(field: str, obj: object) -> Any:
+    def get_event_data_context(field: str, obj: object) -> dict | list | str:
         """Get event data from nested context object in req.
 
         Args:
@@ -149,7 +144,7 @@ class AuditMiddleware:
             return None
 
     @staticmethod
-    def get_event_data_list(data: list, key2: str) -> Any:
+    def get_event_data_list(data: list, key2: str) -> dict | list | str:
         """Get event data from list by index value.
 
         Args:
