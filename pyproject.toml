@@ -25,20 +25,20 @@ use_parentheses = true
 [tool.poetry]
 authors = ["Bracey Summers <bcsummers@gmail.com>"]
 classifiers = [
-  "Development Status :: 5 - Production/Stable",
-  "Environment :: Web Environment",
-  "Framework :: Falcon",
-  "Intended Audience :: Developers",
-  "License :: OSI Approved :: Apache Software License",
-  "Natural Language :: English",
-  "Operating System :: OS Independent",
-  "Programming Language :: Python",
-  "Programming Language :: Python :: 3.10",
-  "Programming Language :: Python :: 3.11",
-  "Programming Language :: Python :: Implementation :: CPython",
-  "Programming Language :: Python :: Implementation :: PyPy",
-  "Topic :: Internet :: WWW/HTTP :: WSGI :: Middleware",
-  "Topic :: Software Development :: Libraries :: Python Modules",
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Web Environment",
+    "Framework :: Falcon",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "Topic :: Internet :: WWW/HTTP :: WSGI :: Middleware",
+    "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 description = "A falcon middleware audit provider."
 documentation = "https://github.com/bcsummers/falcon-provider-audit"
@@ -47,7 +47,7 @@ keywords = ["audit", "falcon"]
 license = "Apache-2.0"
 maintainers = ["Bracey Summers <bcsummers@gmail.com>"]
 name = "falcon-provider-audit"
-packages = [{include = "falcon_provider_audit"}]
+packages = [{ include = "falcon_provider_audit" }]
 readme = "README.rst"
 repository = "https://github.com/bcsummers/falcon-provider-audit"
 version = "0.0.2"
@@ -68,7 +68,7 @@ black = "^22.12.0"
 isort = "^5.10.1"
 pre-commit = "^2.20.0"
 pycodestyle = "^2.10.0"
-pydocstyle = {extras = ["toml"], version = "^6.1.1"}
+pydocstyle = { extras = ["toml"], version = "^6.1.1" }
 pylint = "^2.15.8"
 pyupgrade = "^3.3.1"
 sqlalchemy = "^1.4.45"
@@ -87,12 +87,13 @@ ignore = "D202,D203,D213,D301,D400,D406,D407,D413,D415"
 
 [tool.pylint.messages_control]
 disable = [
-  "duplicate-code", # R0801
-  "fixme", # W0511
-  "invalid-name", # C0103
-  "logging-fstring-interpolation", # W1203
-  "too-few-public-methods", # R0903
-  "too-many-arguments", # R0913
-  "too-many-instance-attributes", # R0902
+    "duplicate-code", # R0801
+    "fixme", # W0511
+    "invalid-name", # C0103
+    "logging-fstring-interpolation", # W1203
+    "too-few-public-methods", # R0903
+    "too-many-arguments", # R0913
+    "too-many-instance-attributes", # R0902
+
 ]
 extension-pkg-whitelist = "falcon"

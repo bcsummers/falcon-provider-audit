@@ -2,7 +2,7 @@
 falcon-provider-audit
 =====================
 
-|build| |coverage| |code-style| |pre-commit|
+|build| |coverage| |codeql| |code-style| |pre-commit|
 
 A falcon middleware audit provider.
 
@@ -231,7 +231,10 @@ Testing
     :target: https://github.com/bcsummers/falcon-provider-audit/actions
 
 .. |coverage| image:: https://codecov.io/gh/bcsummers/falcon-provider-audit/branch/master/graph/badge.svg?token=ZKU0FH4ESQ
- :target: https://codecov.io/gh/bcsummers/falcon-provider-audit
+    :target: https://codecov.io/gh/bcsummers/falcon-provider-audit
+
+.. |codeql| image:: https://github.com/bcsummers/falcon-provider-audit/actions/workflows/codeql.yml/badge.svg
+    :target: https://github.com/bcsummers/falcon-provider-audit/actions/workflows/codeql.yml
 
 .. |code-style| image:: https://img.shields.io/badge/code%20style-black-000000.svg
     :target: https://github.com/python/black
